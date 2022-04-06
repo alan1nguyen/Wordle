@@ -23,15 +23,54 @@
                 Environment.Exit(0);
             }
 
-            // words is a string array containing the words from the text file
+            // string array containing the words from the text file
             var words = File.ReadAllLines(fileName);
             Random rand = new Random();
             String word = words[rand.Next(words.Length)];
-            Console.WriteLine(word);
+            //Console.WriteLine(word);
 
             // PROCESS USER INPUT GUESS
+            Console.Write("How many guesses?: ");
+            int numGuesses;
+            while (!int.TryParse(Console.ReadLine(), out numGuesses)) {
+                Console.Write("Please enter the number of guesses: ");
+            }
 
-            // OUTPUT
+            bool solved = false;
+            int attempt = 1;
+
+            Console.WriteLine();
+
+            do {
+                Console.WriteLine("Attempt #{0} ",attempt);
+                Console.Write("Enter Guess: ");
+                string? guess = Convert.ToString(Console.ReadLine());
+
+                var result = Enumerable.Range(0, guess.Length).Select(i=>new
+                {
+                    index = i,
+	                letter = guess[i],
+	                wrongPosition = word.ToList().Contains(guess[i]),
+                    correct = guess[i] == word[i]
+                });
+
+                // prints result string of guess and word comparison
+                // If letter is in correct position, character is capitalized
+                // If letter is in wrong position, character is lowercase
+                // If letter is not in word, '_' 
+                var resultstring = string.Concat(result.Select(i => 
+                i.correct ? i.letter.ToString().ToUpper()[0] : 
+                i.wrongPosition ? i.letter.ToString().ToLower()[0] : '_'));
+
+                Console.WriteLine(resultstring);
+                if(word == guess) {
+                    solved = true;
+                }
+                attempt++;
+            }
+            while(!solved && attempt <= numGuesses);
+
+            Console.WriteLine("The word was: "+word);
 
         }
     }
