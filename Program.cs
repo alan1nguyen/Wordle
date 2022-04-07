@@ -96,7 +96,6 @@ namespace Wordle {
             while(!solved && attempt <= numGuesses);
 
             Console.WriteLine("The word was: "+ word);
-
         }
     }
 }
