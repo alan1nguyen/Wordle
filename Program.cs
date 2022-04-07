@@ -1,4 +1,6 @@
-﻿namespace Wordle {
+﻿using System.Text;
+
+namespace Wordle {
     class Program {
         static void Main(string[] args) {
             
@@ -23,15 +25,77 @@
                 Environment.Exit(0);
             }
 
-            // words is a string array containing the words from the text file
+            // string array containing the words from the text file
             var words = File.ReadAllLines(fileName);
             Random rand = new Random();
             String word = words[rand.Next(words.Length)];
-            Console.WriteLine(word);
 
             // PROCESS USER INPUT GUESS
+            Console.Write("How many guesses?: ");
+            int numGuesses;
+            while (!int.TryParse(Console.ReadLine(), out numGuesses)) {
+                Console.Write("Please enter the number of guesses: ");
+            }
 
-            // OUTPUT
+            bool solved = false;
+            int attempt = 1;
+
+            // this line reveals the length of the picked word 
+            //Console.WriteLine(new String('_', word.Length));
+
+            do {
+
+                Console.WriteLine("Attempt #{0} ",attempt);
+                Console.Write("Enter Guess: ");
+                string? guess = Console.ReadLine();
+
+                if (guess is null) {
+                    throw new ArgumentNullException(nameof(guess));
+                }
+                else if (int.TryParse(guess, out _)) {
+                    Console.WriteLine("Guess is not valid!");
+                }
+                else if (guess.Length < word.Length) {
+                    //Console.WriteLine("Guess is too short!");
+                }
+                else {
+                    guess = guess.Substring(0,word.Length).ToLower();
+                }
+
+                // prints result string of guess and word comparison
+                // If letter is in correct position, character is capitalized
+                // If letter is in wrong position, character is lowercase
+                // If letter is not in word, leave blank or '_' 
+
+                string result = new String('_', word.Length);
+                StringBuilder resultString = new StringBuilder(result);
+
+                for (int i=0; i<guess.Length; i++) {
+                    if (word[i] == guess[i]) {
+                        resultString[i] = guess[i].ToString().ToUpper()[0];
+                    }
+                    else if (word.Contains(guess[i])) {
+                        resultString[i] = guess[i].ToString().ToLower()[0];
+                    }
+                    else {
+                        resultString[i] = '_';
+                    }
+                }
+                
+                if (word == guess) {
+                    solved = true;
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine(resultString);
+                    Console.ResetColor();
+                }
+                else {
+                    Console.WriteLine(resultString);
+                }
+                attempt++;
+            }
+            while(!solved && attempt <= numGuesses);
+
+            Console.WriteLine("The word was: "+ word);
 
         }
     }
