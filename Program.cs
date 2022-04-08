@@ -9,6 +9,7 @@ namespace Wordle {
                 Console.WriteLine("No file provided");
                 Environment.Exit(0);
             }
+
             string fileName = @"Resources\" + args[0];
 
             try {
@@ -40,13 +41,9 @@ namespace Wordle {
             bool solved = false;
             int attempt = 1;
 
-            // this line reveals the length of the picked word 
-            //Console.WriteLine(new String('_', word.Length));
-
             do {
 
-                Console.WriteLine("Attempt #{0} ",attempt);
-                Console.Write("Enter Guess: ");
+                Console.Write("Attempt #{0} ",attempt);
                 string? guess = Console.ReadLine();
 
                 if (guess is null) {
@@ -56,20 +53,19 @@ namespace Wordle {
                     Console.WriteLine("Guess is not valid!");
                 }
                 else if (guess.Length < word.Length) {
-                    //Console.WriteLine("Guess is too short!");
+                    guess = guess.Substring(0,guess.Length).ToLower();
                 }
                 else {
                     guess = guess.Substring(0,word.Length).ToLower();
                 }
 
                 // prints result string of guess and word comparison
-                // If letter is in correct position, character is capitalized
-                // If letter is in wrong position, character is lowercase
-                // If letter is not in word, leave blank or '_' 
-
                 string result = new String('_', word.Length);
                 StringBuilder resultString = new StringBuilder(result);
 
+                // If letter is in correct position, character is capitalized
+                // If letter is in wrong position, character is lowercase
+                // If letter is not in word, leave blank or '_' 
                 for (int i=0; i<guess.Length; i++) {
                     if (word[i] == guess[i]) {
                         resultString[i] = guess[i].ToString().ToUpper()[0];
@@ -91,7 +87,9 @@ namespace Wordle {
                 else {
                     Console.WriteLine(resultString);
                 }
+
                 attempt++;
+
             }
             while(!solved && attempt <= numGuesses);
 
