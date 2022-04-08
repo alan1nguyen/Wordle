@@ -43,7 +43,7 @@ namespace Wordle {
 
             do {
 
-                Console.Write("Attempt #{0} ",attempt);
+                Console.Write("Attempt #{0}: ",attempt);
                 string? guess = Console.ReadLine();
 
                 if (guess is null) {
