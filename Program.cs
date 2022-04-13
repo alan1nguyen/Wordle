@@ -1,7 +1,18 @@
 ﻿using System.Text;
 
 namespace Wordle {
+
+    class Word {
+        public String getWord (String fileName) {
+            var words = File.ReadAllLines(fileName);
+            Random rand = new Random();
+            return words[rand.Next(words.Length)].ToLower();
+        }
+
+    }
+
     class Program {
+
         static void Main(string[] args) {
             
             // READ TEXT FILE FROM COMMAND LINE AND RANDOMLY PICK WORD TO GUESS
@@ -26,12 +37,10 @@ namespace Wordle {
                 Environment.Exit(0);
             }
 
-            // string array containing the words from the text file
-            var words = File.ReadAllLines(fileName);
-            Random rand = new Random();
-            String word = words[rand.Next(words.Length)];
+            // PICK RANDOM WORD TO SOLVE
+            Word mysteryWord = new Word();
+            String word = mysteryWord.getWord(fileName);
 
-            // PROCESS USER INPUT GUESS
             Console.Write("How many guesses?: ");
             int numGuesses;
             while (!int.TryParse(Console.ReadLine(), out numGuesses)) {
@@ -41,6 +50,7 @@ namespace Wordle {
             bool solved = false;
             int attempt = 1;
 
+            // PROCESS USER INPUT GUESS
             do {
 
                 Console.Write("Attempt #{0}: ",attempt);
@@ -72,9 +82,6 @@ namespace Wordle {
                     }
                     else if (word.Contains(guess[i])) {
                         resultString[i] = guess[i].ToString().ToLower()[0];
-                    }
-                    else {
-                        resultString[i] = '_';
                     }
                 }
                 
