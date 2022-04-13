@@ -38,6 +38,8 @@ Written using latest .NET SDK (6.0.201) in C# syntax.
 
 ## How to setup and run
 
+Latest [.NET SDK](https://dotnet.microsoft.com/en-us/download) must be installed
+
 Test .txt files must be located in `\Resources`. I have added 5 files in addition to `"custom.txt"`.
 
 Test file names are:
