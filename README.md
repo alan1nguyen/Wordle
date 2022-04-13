@@ -50,11 +50,15 @@ Test file names are:
 
 To run application in Command Prompt:
 
-1. Navigate to folder in Command Prompt
+1. Download Wordle-master.zip
 
-    - `.. Wordle\bin\Debug\net6.0`
+2. Extract .zip file in your desired location with 'Extract Here'
 
-    - Run command `dotnet Wordle.dll "FileName.txt"`
+3. Navigate to folder in Command Prompt
+
+    - `cd .. \Wordle-master`
+
+    - Run command `dotnet run "FileName.txt"`
 
 To run application in Visual Studio Code:
 
