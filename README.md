@@ -2,6 +2,38 @@
 
 This Wordle game is based on the original [Wordle](https://www.nytimes.com/games/wordle/index.html) with features that include inputting a text file with 4+ letter words or custom words with varying lengths and an variable number of attempts to guess the word.
 
+## How to setup and run
+
+Latest [.NET SDK](https://dotnet.microsoft.com/en-us/download) must be installed
+
+Test .txt files must be located in `\Resources`. I have added 5 files in addition to `"custom.txt"`.
+
+Test file names are:
+
+- `"wordle4.txt"`
+- `"wordle5.txt"`
+- `"wordle6.txt"`
+- `"wordle7.txt"`
+- `"random.txt"`
+
+To run application in Command Prompt:
+
+1. Download Wordle-1.0.zip
+
+2. Extract .zip file in your desired location
+
+3. Navigate to folder in Command Prompt
+
+    - `cd .. \Wordle-1.0`
+
+    - Run command `dotnet run "FileName.txt"`
+
+To run application in Visual Studio Code:
+
+1. Open Wordle folder in Visual Studio Code
+
+2. In terminal run command `dotnet run "FileName.txt"`
+
 ## Explanation 
 
 The program will:
@@ -35,38 +67,6 @@ The program will:
 ## Technologies used
 
 Written using latest .NET SDK (6.0.201) in C# syntax.
-
-## How to setup and run
-
-Latest [.NET SDK](https://dotnet.microsoft.com/en-us/download) must be installed
-
-Test .txt files must be located in `\Resources`. I have added 5 files in addition to `"custom.txt"`.
-
-Test file names are:
-
-- `"wordle4.txt"`
-- `"wordle5.txt"`
-- `"wordle6.txt"`
-- `"wordle7.txt"`
-- `"random.txt"`
-
-To run application in Command Prompt:
-
-1. Download Wordle-master.zip
-
-2. Extract .zip file in your desired location with 'Extract Here'
-
-3. Navigate to folder in Command Prompt
-
-    - `cd .. \Wordle-master`
-
-    - Run command `dotnet run "FileName.txt"`
-
-To run application in Visual Studio Code:
-
-1. Open Wordle folder in Visual Studio Code
-
-2. In terminal run command `dotnet run "FileName.txt"`
 
 ## Conclusion
 
